@@ -71,37 +71,37 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             <h3 className="font-medium">Competitions</h3>
             <Link
-              href="/leagues/premier-league"
+              href="/Competitions/PL"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Premier League
             </Link>
             <Link
-              href="/leagues/la-liga"
+              href="/Competitions/PD"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               La Liga
             </Link>
             <Link
-              href="/leagues/bundesliga"
+              href="/Competitions/BL1"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Bundesliga
             </Link>
             <Link
-              href="/leagues/serie-a"
+              href="/Competitions/SA"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Serie A
             </Link>
             <Link
-              href="/leagues/ligue-1"
+              href="/Competitions/FL1"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Ligue 1
             </Link>
             <Link
-              href="/leagues/champions-league"
+              href="/Competitions/CL"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Champions League

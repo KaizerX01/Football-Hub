@@ -5,8 +5,9 @@ export async function GET(
   request: Request,
   { params }: { params: { code: string } }
 ) {
+  const { code } = await params;
   try {
-    const response = await apiClient.get(`/competitions/${params.code}/standings`);
+    const response = await apiClient.get(`/competitions/${code}/standings`);
     const data = response.data;
     return NextResponse.json(data);
   } catch (error) {

@@ -30,7 +30,7 @@ export function CompetitionHero({
   }
 
   return (
-    <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div className="relative bg-gradient-to-r from-white-400 to-gray-800 text-white">
       <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20')] bg-cover bg-center" />
       <div className="relative container mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row items-center gap-8">
