@@ -1,8 +1,25 @@
-import React from "react";
+"use client";
+import React, { ReactElement, useState } from "react";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { RegisterEmail } from "@/lib/SubscribedEmails";
+import toast from "react-hot-toast";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const { data, error } = await RegisterEmail(email);
+
+    if (error) {
+      toast.error(error);
+      return;
+    }
+
+    toast.success("Done! you will get the latest updates about our website!");
+  };
+
   return (
     <footer className="w-full border-t bg-card">
       <div className="container py-10">
@@ -171,18 +188,18 @@ export default function Footer() {
               Terms of Service
             </Link>
           </div>
-
           {/* Subscribe */}
           <div className="flex flex-col gap-2">
             <h3 className="font-medium">Subscribe</h3>
             <p className="text-sm text-muted-foreground">
               Get the latest football updates
             </p>
-            <form className="mt-2 flex flex-col gap-2">
+            <form className="mt-2 flex flex-col gap-2" onSubmit={handleSubmit}>
               <input
                 type="email"
                 placeholder="Your email"
                 className="rounded-md border bg-background px-3 py-2 text-sm"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <button
                 type="submit"

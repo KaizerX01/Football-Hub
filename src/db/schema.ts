@@ -11,3 +11,6 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 });
 
+export const contactEmails = pgTable('contactEmails',{
+  email:text('email').notNull().unique().primaryKey(),
+})
