@@ -23,10 +23,10 @@ export default function HeroSection() {
               Live Matches
             </Link>
             <Link
-              href="/subscribe"
+              href="/Competitions"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
             >
-              Subscribe for Updates <ChevronRight size={16} className="ml-2" />
+              Check top competitions <ChevronRight size={16} className="ml-2" />
             </Link>
           </div>
         </div>

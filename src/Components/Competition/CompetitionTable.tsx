@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface CompetitionTableProps {
@@ -58,7 +59,9 @@ export function CompetitionTable({
                       className="w-6 h-6 object-contain rounded-full"
                     />
                   )}
-                  <span>{team.team.name}</span>
+                  <Link href={`/teams/${team.team.id}`}>
+                    <span>{team.team.name}</span>
+                  </Link>
                 </div>
               </td>
               <td className="text-center py-3 px-4">{team.playedGames}</td>

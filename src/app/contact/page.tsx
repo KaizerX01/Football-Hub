@@ -67,7 +67,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-[#2E0249] to-[#570A57] text-white">
+    <div className="w-full min-h-screen bg-gradient-to-b from-[#2E0249] to-[#1d0767] text-white">
       {/* Hero Section */}
       <div
         className="relative h-64 md:h-80 w-full bg-cover bg-center"
