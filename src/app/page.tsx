@@ -1,7 +1,7 @@
-import HeroSection from "@/Components/HeroSection";
-import MatchesSection from "@/Components/MatchSection";
-import NewsSection from "@/Components/NewsSection";
-import StatsSection from "@/Components/StatsSection";
+import HeroSection from "@/Components/HomePage/HeroSection";
+import MatchesSection from "@/Components/HomePage/MatchSection";
+import NewsSection from "@/Components/HomePage/NewsSection";
+import StatsSection from "@/Components/HomePage/StatsSection";
 
 export default function Home() {
   return (

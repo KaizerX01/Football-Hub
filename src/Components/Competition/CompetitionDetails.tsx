@@ -3,6 +3,7 @@ import { Calendar, Trophy, Users } from "lucide-react";
 import { CompetitionHero } from "./CompetitionHero";
 import { CompetitionStats } from "./CompetitionState";
 import { CompetitionTable } from "./CompetitionTable";
+import Link from "next/link";
 
 interface CompetitionDetailsProps {
   data: any;
@@ -102,10 +103,16 @@ export function CompetitionDetails({
                             {index + 1}
                           </span>
                           <div>
-                            <p className="font-medium">{scorer.player.name}</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                              {scorer.team.name}
-                            </p>
+                            <Link href={`/players/${scorer.player.id}`}>
+                              <p className="font-medium">
+                                {scorer.player.name}
+                              </p>
+                            </Link>
+                            <Link href={`/teams/${scorer.team.id}`}>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {scorer.team.name}
+                              </p>
+                            </Link>
                           </div>
                         </div>
                         <span className="font-bold">{scorer.goals} goals</span>
@@ -122,7 +129,6 @@ export function CompetitionDetails({
                 Upcoming Fixtures
               </h2>
 
-              {/* Placeholder (soon dynamic) */}
               {matchesLoading ? (
                 <div className="space-y-4">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -160,15 +166,37 @@ export function CompetitionDetails({
                           {match.utcDate}
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="font-medium">
-                            {match.homeTeam.name}
-                          </span>
+                          <Link
+                            href={`/teams/${match.homeTeam.id}`}
+                            className="flex items-center space-x-2"
+                          >
+                            <img
+                              src={match.homeTeam.crest}
+                              alt={`${match.homeTeam.name} logo`}
+                              className="w-6 h-6 object-contain"
+                            />
+                            <span className="font-medium">
+                              {match.homeTeam.name}
+                            </span>
+                          </Link>
+
                           <span className="text-sm px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded">
                             vs
                           </span>
-                          <span className="font-medium">
-                            {match.awayTeam.name}
-                          </span>
+
+                          <Link
+                            href={`/teams/${match.awayTeam.id}`}
+                            className="flex items-center space-x-2"
+                          >
+                            <img
+                              src={match.awayTeam.crest}
+                              alt={`${match.awayTeam.name} logo`}
+                              className="w-6 h-6 object-contain"
+                            />
+                            <span className="font-medium">
+                              {match.awayTeam.name}
+                            </span>
+                          </Link>
                         </div>
                       </div>
                     ))}
