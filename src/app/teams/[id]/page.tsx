@@ -27,7 +27,7 @@ const ClubDetailPage = () => {
     <div>
       <div className="m-6 text-3xl">
         <Link
-          href="/"
+          href="/teams"
           className="inline-flex items-center text-green-600 hover:text-green-800 transition"
         >
           <svg

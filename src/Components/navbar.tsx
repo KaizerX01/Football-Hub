@@ -19,6 +19,94 @@ export default function Navbar() {
 
   const shouldRenderAuthContent = mounted && !isLoading;
 
+  // If not mounted yet, render a skeleton that matches the server-side render exactly
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
+            <a href="/" className="flex items-center gap-2">
+              <div className="rounded-full bg-green-600 p-1">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12 15L9 12M12 15L15 12M12 15V9M7.8 7.8L7 7M16.2 7.8L17 7"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <span className="text-xl font-bold">FootballHub</span>
+            </a>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            <a
+              href="/Competitions"
+              className="text-sm font-medium hover:text-primary"
+            >
+              Competitions
+            </a>
+            <a href="/teams" className="text-sm font-medium hover:text-primary">
+              Teams
+            </a>
+            <a
+              href="/matches"
+              className="text-sm font-medium hover:text-primary"
+            >
+              Matches
+            </a>
+            <a href="/news" className="text-sm font-medium hover:text-primary">
+              News
+            </a>
+            <a
+              href="/contact"
+              className="text-sm font-medium hover:text-primary"
+            >
+              Contact
+            </a>
+          </nav>
+
+          <div className="hidden md:flex items-center gap-4">
+            <button className="rounded-md p-2 hover:bg-accent">
+              <Search size={20} />
+            </button>
+            <button className="rounded-md p-2 hover:bg-accent">
+              <Bell size={20} />
+            </button>
+            <div className="h-6 w-px bg-border"></div>
+
+            {/* Skeleton placeholders for auth UI */}
+            <div className="flex items-center gap-3 min-w-32">
+              <div className="h-8 w-16 rounded-md bg-muted animate-pulse"></div>
+              <div className="h-9 w-20 rounded-md bg-primary/30 animate-pulse"></div>
+            </div>
+          </div>
+
+          <button className="md:hidden rounded-md p-2 hover:bg-accent">
+            <Menu size={20} />
+          </button>
+        </div>
+      </header>
+    );
+  }
+
+  // Full component with interactivity after hydration
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -67,10 +155,10 @@ export default function Navbar() {
             Teams
           </Link>
           <Link
-            href="/players"
+            href="/matches"
             className="text-sm font-medium hover:text-primary"
           >
-            Players
+            Matches
           </Link>
           <Link href="/news" className="text-sm font-medium hover:text-primary">
             News
@@ -92,59 +180,61 @@ export default function Navbar() {
           </button>
           <div className="h-6 w-px bg-border"></div>
 
-          {/* Auth state UI - only shown when component is mounted and not loading */}
-          {!shouldRenderAuthContent ? (
-            // Loading state - consistent width placeholder
+          {/* Auth state UI */}
+          {!isLoading ? (
+            !user ? (
+              // Not logged in state
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-medium hover:text-primary"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="w-full rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground"
+                >
+                  Sign Up
+                </Link>
+              </>
+            ) : (
+              // Logged in state
+              <>
+                <Link
+                  href="/my-teams"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary whitespace-nowrap"
+                >
+                  My Teams
+                </Link>
+                <Link
+                  href="/profile"
+                  className="text-sm font-medium hover:text-primary"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={async () => {
+                    const error = await SignOut();
+                    if (error) {
+                      toast.error("Error");
+                      return;
+                    }
+                    toast.success("You logged out successfully");
+                    window.location.href = "/";
+                  }}
+                  className="w-full rounded-md bg-destructive px-4 py-2 text-center text-sm font-medium text-white hover:bg-destructive/90 cursor-pointer"
+                >
+                  Sign Out
+                </button>
+              </>
+            )
+          ) : (
+            // Loading state
             <div className="flex items-center gap-3 min-w-32">
               <div className="h-8 w-16 rounded-md bg-muted animate-pulse"></div>
               <div className="h-9 w-20 rounded-md bg-primary/30 animate-pulse"></div>
             </div>
-          ) : !user ? (
-            // Not logged in state
-            <>
-              <Link
-                href="/login"
-                className="text-sm font-medium hover:text-primary"
-              >
-                Login
-              </Link>
-              <Link
-                href="/sign-up"
-                className="w-full rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground"
-              >
-                Sign Up
-              </Link>
-            </>
-          ) : (
-            // Logged in state
-            <>
-              <Link
-                href="/my-teams"
-                className="text-sm font-medium text-muted-foreground hover:text-primary whitespace-nowrap"
-              >
-                My Teams
-              </Link>
-              <Link
-                href="/profile"
-                className="text-sm font-medium hover:text-primary"
-              >
-                Profile
-              </Link>
-              <button
-                onClick={async () => {
-                  const error = await SignOut();
-                  if (error) {
-                    toast.error("Error");
-                    return;
-                  }
-                  toast.success("You logged out successfully");
-                  window.location.href = "/";
-                }}
-                className="w-full rounded-md bg-destructive px-4 py-2 text-center text-sm font-medium text-white hover:bg-destructive/90 cursor-pointer"
-              >
-                Sign Out
-              </button>
-            </>
           )}
         </div>
 
@@ -172,10 +262,10 @@ export default function Navbar() {
               Teams
             </Link>
             <Link
-              href="/players"
+              href="/matches"
               className="text-sm font-medium hover:text-primary"
             >
-              Players
+              Matches
             </Link>
             <Link
               href="/news"
@@ -191,59 +281,61 @@ export default function Navbar() {
             </Link>
             <div className="h-px w-full bg-border"></div>
 
-            {/* Mobile auth state UI - only shown when component is mounted and not loading */}
-            {!shouldRenderAuthContent ? (
-              // Loading state - consistent height placeholder
+            {/* Mobile auth state UI */}
+            {!isLoading ? (
+              !user ? (
+                // Not logged in state
+                <>
+                  <Link
+                    href="/login"
+                    className="text-sm font-medium hover:text-primary"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    className="w-full rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              ) : (
+                // Logged in state
+                <>
+                  <Link
+                    href="/my-teams"
+                    className="w-full rounded-md bg-muted px-4 py-2 text-center text-sm font-medium text-foreground hover:bg-muted/70 transition"
+                  >
+                    My Teams
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className="text-sm font-medium hover:text-primary"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={async () => {
+                      const error = await SignOut();
+                      if (error) {
+                        toast.error("Error");
+                        return;
+                      }
+                      toast.success("You logged out successfully");
+                      window.location.href = "/";
+                    }}
+                    className="w-full rounded-md bg-destructive px-4 py-2 text-center text-sm font-medium text-white hover:bg-destructive/90 cursor-pointer"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              )
+            ) : (
+              // Loading state
               <div className="flex flex-col gap-3">
                 <div className="h-10 w-full rounded-md bg-muted animate-pulse"></div>
                 <div className="h-10 w-full rounded-md bg-primary/30 animate-pulse"></div>
               </div>
-            ) : !user ? (
-              // Not logged in state
-              <>
-                <Link
-                  href="/login"
-                  className="text-sm font-medium hover:text-primary"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/sign-up"
-                  className="w-full rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground"
-                >
-                  Sign Up
-                </Link>
-              </>
-            ) : (
-              // Logged in state
-              <>
-                <Link
-                  href="/my-teams"
-                  className="w-full rounded-md bg-muted px-4 py-2 text-center text-sm font-medium text-foreground hover:bg-muted/70 transition"
-                >
-                  My Teams
-                </Link>
-                <Link
-                  href="/profile"
-                  className="text-sm font-medium hover:text-primary"
-                >
-                  Profile
-                </Link>
-                <button
-                  onClick={async () => {
-                    const error = await SignOut();
-                    if (error) {
-                      toast.error("Error");
-                      return;
-                    }
-                    toast.success("You logged out successfully");
-                    window.location.href = "/";
-                  }}
-                  className="w-full rounded-md bg-destructive px-4 py-2 text-center text-sm font-medium text-white hover:bg-destructive/90 cursor-pointer"
-                >
-                  Sign Out
-                </button>
-              </>
             )}
           </nav>
         </div>

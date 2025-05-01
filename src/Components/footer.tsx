@@ -22,7 +22,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t bg-card mt-10">
-      <div className="container py-10">
+      <div className="container py-10 ml-30">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2">
@@ -151,12 +151,6 @@ export default function Footer() {
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Teams
-            </Link>
-            <Link
-              href="/players"
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              Players
             </Link>
           </div>
 

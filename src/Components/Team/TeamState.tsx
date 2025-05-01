@@ -124,9 +124,11 @@ const TeamStats = ({
               key={player.id}
               className="border p-4 rounded-lg shadow-sm hover:shadow-md transition-all"
             >
-              <h4 className="text-md font-semibold text-gray-800">
-                {player.name}
-              </h4>
+              <Link href={`/players/${player.id}`}>
+                <h4 className="text-md font-semibold text-gray-800">
+                  {player.name}
+                </h4>
+              </Link>
               <p className="text-sm text-gray-500">{player.position}</p>
             </div>
           ))}
