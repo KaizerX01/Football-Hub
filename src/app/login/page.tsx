@@ -138,12 +138,12 @@ export function LoginPage() {
                     </label>
                   </div>
                   <div className="text-sm">
-                    <a
+                    <Link
                       href="#"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div>
@@ -181,13 +181,13 @@ export function LoginPage() {
           <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
             <p className="text-xs text-center text-gray-500 dark:text-gray-400">
               By signing in, you agree to our{" "}
-              <a href="#" className="underline">
+              <Link href="#" className="underline">
                 Terms of Service
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="underline">
+              <Link href="#" className="underline">
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </div>
         </div>

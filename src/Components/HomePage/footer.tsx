@@ -57,30 +57,30 @@ export default function Footer() {
               stats.
             </p>
             <div className="flex space-x-4">
-              <a
+              <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Facebook size={20} />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Twitter size={20} />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Instagram size={20} />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Youtube size={20} />
-              </a>
+              </Link>
             </div>
           </div>
 

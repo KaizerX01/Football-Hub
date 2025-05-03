@@ -25,7 +25,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <a href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <div className="rounded-full bg-green-600 p-1">
                 <svg
                   width="24"
@@ -51,35 +51,35 @@ export default function Navbar() {
                 </svg>
               </div>
               <span className="text-xl font-bold">FootballHub</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <a
+            <Link
               href="/Competitions"
               className="text-sm font-medium hover:text-primary"
             >
               Competitions
-            </a>
-            <a href="/teams" className="text-sm font-medium hover:text-primary">
+            </Link>
+            <Link href="/teams" className="text-sm font-medium hover:text-primary">
               Teams
-            </a>
-            <a
+            </Link>
+            <Link
               href="/matches"
               className="text-sm font-medium hover:text-primary"
             >
               Matches
-            </a>
-            <a href="/news" className="text-sm font-medium hover:text-primary">
+            </Link>
+            <Link href="/news" className="text-sm font-medium hover:text-primary">
               News
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className="text-sm font-medium hover:text-primary"
             >
               Contact
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
