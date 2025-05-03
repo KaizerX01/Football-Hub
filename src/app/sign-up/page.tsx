@@ -49,7 +49,6 @@ export function SignUpPage() {
     if (error) {
       toast.error(error);
       return;
-      0;
     }
     toast.success("The account is created successfully !");
     router.push("/");

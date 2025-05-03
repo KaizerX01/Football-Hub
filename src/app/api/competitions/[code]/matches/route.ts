@@ -1,19 +1,24 @@
 import { apiClient } from "@/lib/ApiClient";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
+// Using the Promise wrapper for params as suggested
 export async function GET(
-  request: Request,
-  { params }: { params: { code: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ code: string }> }
 ) {
+  // Await the params promise to get the actual values
   const { code } = await params;
+  
   try {
+    // Fetch matches from the API
     const response = await apiClient.get(`/competitions/${code}/matches/?status=SCHEDULED`);
-    const data = response.data;
-    return NextResponse.json(data);
+   
+    // Return data as a JSON response
+    return NextResponse.json(response.data);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching competition matches:", error);
     return NextResponse.json(
-      { message: "Failed to fetch competition up comming matches " },
+      { message: "Failed to fetch competition upcoming matches" },
       { status: 500 }
     );
   }

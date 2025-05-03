@@ -9,7 +9,7 @@ interface ContactInfo{
 }
 
 
-export async function useContact(formState :ContactInfo){
+export async function sendContactForm(formState :ContactInfo){
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: {

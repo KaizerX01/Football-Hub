@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
-import { useContact } from "@/hooks/useContact";
+import { sendContactForm } from "@/hooks/sendContactForm";
 import toast from "react-hot-toast";
 
 const ContactPage = () => {
@@ -42,7 +42,7 @@ const ContactPage = () => {
       setIsSubmitting(true);
 
       try {
-        const result = await useContact(formState);
+        const result = await sendContactForm(formState);
 
         if (result.success) {
           setIsSubmitted(true);
@@ -126,8 +126,8 @@ const ContactPage = () => {
                   Thank You!
                 </h3>
                 <p className="text-center text-gray-600">
-                  Your message has been sent successfully. We'll get back to you
-                  soon.
+                  Your message has been sent successfully. We&apos;ll get back
+                  to you soon.
                 </p>
               </div>
             ) : (

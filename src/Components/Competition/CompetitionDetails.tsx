@@ -157,7 +157,7 @@ export function CompetitionDetails({
                 <div className="space-y-4">
                   {matches.matches
                     ?.slice(0, 5)
-                    .map((match: any, index: Number) => (
+                    .map((match: any, index: number) => (
                       <div
                         key={match?.id}
                         className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
