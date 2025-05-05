@@ -14,3 +14,8 @@ export const users = pgTable('users', {
 export const contactEmails = pgTable('contactEmails',{
   email:text('email').notNull().unique().primaryKey(),
 })
+
+export const teams = pgTable('teams',{
+  id:text('id').primaryKey(),
+  name:text('name').notNull(),
+})
