@@ -141,10 +141,10 @@ export default function Footer() {
               News
             </Link>
             <Link
-              href="/stats"
+              href="/Competitions"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
-              Stats
+              Competitions
             </Link>
             <Link
               href="/teams"

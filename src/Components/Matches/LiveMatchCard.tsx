@@ -99,7 +99,7 @@ export function LiveMatchCard({ match }: any) {
           {/* Away Team */}
           <div className="w-1/3 flex flex-col items-center text-center">
             <div className="h-28 w-28 flex items-center justify-center mb-4">
-              <Link href={`/teams/${homeTeam.id}`}>
+              <Link href={`/teams/${awayTeam.id}`}>
                 {awayTeam?.crest && (
                   <img
                     src={awayTeam.crest}

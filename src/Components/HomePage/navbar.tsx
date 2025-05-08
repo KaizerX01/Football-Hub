@@ -62,7 +62,10 @@ export default function Navbar() {
             >
               Competitions
             </Link>
-            <Link href="/teams" className="text-sm font-medium hover:text-primary">
+            <Link
+              href="/teams"
+              className="text-sm font-medium hover:text-primary"
+            >
               Teams
             </Link>
             <Link
@@ -71,7 +74,10 @@ export default function Navbar() {
             >
               Matches
             </Link>
-            <Link href="/news" className="text-sm font-medium hover:text-primary">
+            <Link
+              href="/news"
+              className="text-sm font-medium hover:text-primary"
+            >
               News
             </Link>
             <Link
@@ -172,9 +178,6 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <button className="rounded-md p-2 hover:bg-accent">
-            <Search size={20} />
-          </button>
           <button className="rounded-md p-2 hover:bg-accent">
             <Bell size={20} />
           </button>
