@@ -24,3 +24,9 @@ export const favoriteTeams = pgTable("favorite_teams", {
   userId: uuid("user_id").references(() => users.id).notNull(),
   teamId: text("team_id").references(() => teams.id).notNull(),
 });
+
+export const subscribedEmails = pgTable("subscribed_emails", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: text("email").notNull().unique(), 
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(), 
+});

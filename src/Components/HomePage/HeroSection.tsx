@@ -1,46 +1,119 @@
+"use client";
 import React from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { useCompetitionStandings } from "@/hooks/useCompetitionStandings";
 
-export default function HeroSection() {
-  return (
-    <section className="w-full bg-gradient-to-b from-background to-accent/20">
-      <div className="container relative py-20 md:py-32">
-        <div className="flex flex-col items-start gap-4 md:w-2/3">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Your Ultimate <span className="text-green-500">Football</span>{" "}
-            Destination
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Live scores, news, stats, and everything you need to stay connected
-            to the beautiful game.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Link
-              href="/matches"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
-            >
-              Live Matches
-            </Link>
-            <Link
-              href="/Competitions"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              Check top competitions <ChevronRight size={16} className="ml-2" />
-            </Link>
-          </div>
+export function HeroSection() {
+  const { data: standings, isLoading, isError } = useCompetitionStandings("PL");
+  const table = standings?.standings?.[0]?.table?.slice(0, 10) || [];
+
+  if (isLoading) {
+    return (
+      <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 rounded-xl p-6 backdrop-blur-md border border-slate-700/50 shadow-lg animate-pulse">
+        <div className="flex items-center justify-between mb-4">
+          <div className="h-6 w-52 bg-slate-700 rounded"></div>
+          <div className="h-4 w-24 bg-slate-700 rounded"></div>
         </div>
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block w-1/3 h-full">
-          <div className="relative w-full h-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10"></div>
-            <img
-              src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-              alt="Football stadium at night"
-              className="object-cover object-center w-full h-full rounded-l-lg opacity-70"
-            />
-          </div>
+        <div className="space-y-2">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between border-b border-slate-700 py-2"
+            >
+              <div className="w-6 h-4 bg-slate-700 rounded"></div>
+              <div className="flex items-center gap-2 w-1/3">
+                <div className="w-5 h-5 bg-slate-700 rounded-full"></div>
+                <div className="w-32 h-4 bg-slate-700 rounded"></div>
+              </div>
+              <div className="w-10 h-4 bg-slate-700 rounded"></div>
+              <div className="w-8 h-4 bg-slate-700 rounded"></div>
+              <div className="w-8 h-4 bg-slate-700 rounded"></div>
+              <div className="w-8 h-4 bg-slate-700 rounded"></div>
+              <div className="w-8 h-4 bg-slate-700 rounded hidden md:block"></div>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
+    );
+  }
+
+  if (isError || !table.length) {
+    return (
+      <div className="bg-gradient-to-r from-red-900/30 to-slate-900/30 p-6 rounded-xl border border-red-600/40 text-white text-center shadow-lg">
+        <p className="text-lg font-semibold text-red-400">
+          🚨 Failed to load Premier League standings.
+        </p>
+        <p className="text-sm text-slate-300 mt-1">
+          Please try again later or check your connection.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 rounded-xl p-6 backdrop-blur-md border border-slate-700/50 shadow-lg">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold text-white">
+          🏆 Premier League Standings
+        </h2>
+        <Link
+          href="/Competitions/PL"
+          className="text-sm text-blue-400 hover:underline"
+        >
+          View Full Table →
+        </Link>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-sm text-gray-200">
+          <thead>
+            <tr className="border-b border-slate-600">
+              <th className="text-left py-2 px-3">#</th>
+              <th className="text-left py-2 px-3">Team</th>
+              <th className="text-center py-2 px-3">Pts</th>
+              <th className="text-center py-2 px-3">W</th>
+              <th className="text-center py-2 px-3">D</th>
+              <th className="text-center py-2 px-3">L</th>
+              <th className="text-center py-2 px-3 hidden md:table-cell">GD</th>
+            </tr>
+          </thead>
+          <tbody>
+            {table.map((team: any) => (
+              <tr
+                key={team.team.id}
+                className="hover:bg-slate-800/50 transition duration-200 border-b border-slate-700"
+              >
+                <td className="py-2 px-3 font-bold text-white">
+                  {team.position}
+                </td>
+                <td className="py-2 px-3 flex items-center gap-2">
+                  {team.team.crest && (
+                    <img
+                      src={team.team.crest}
+                      alt={team.team.name}
+                      className="w-5 h-5 object-contain"
+                    />
+                  )}
+                  <Link
+                    href={`/teams/${team.team.id}`}
+                    className="hover:underline text-white"
+                  >
+                    {team.team.name}
+                  </Link>
+                </td>
+                <td className="text-center py-2 px-3 font-semibold text-yellow-400">
+                  {team.points}
+                </td>
+                <td className="text-center py-2 px-3">{team.won}</td>
+                <td className="text-center py-2 px-3">{team.draw}</td>
+                <td className="text-center py-2 px-3">{team.lost}</td>
+                <td className="text-center py-2 px-3 hidden md:table-cell">
+                  {team.goalDifference}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
