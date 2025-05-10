@@ -6,7 +6,7 @@ import { teams } from '../db/schema';
 
 export async function seedTeams() {
   try {
-    const res = await localApiClient.get(`/teams?limit=2000&offset=1000`);
+    const res = await localApiClient.get(`/teams?limit=2000&offset=0`);
     const rawTeams = res.data?.teams;
     
     if (!Array.isArray(rawTeams)) {

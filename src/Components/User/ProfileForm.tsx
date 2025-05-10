@@ -9,8 +9,7 @@ const ProfileForm = () => {
   const { metaData, isLoading, user } = useLoggedInUser();
   const [formData, setFormData] = useState({
     name: "",
-    favoriteTeam: "",
-    favoriteCountry: "",
+    Country: "",
     password: "",
     avatar_url: "",
   });
@@ -23,8 +22,7 @@ const ProfileForm = () => {
     if (metaData) {
       setFormData({
         name: metaData.name || "",
-        favoriteTeam: metaData.favoriteTeam || "",
-        favoriteCountry: metaData.favoriteCountry || "",
+        Country: metaData.Country || "",
         password: "",
         avatar_url: metaData.avatar_url || "",
       });
@@ -181,32 +179,17 @@ const ProfileForm = () => {
       </div>
 
       <div>
-        <label htmlFor="favoriteTeam" className={labelClasses}>
-          Favorite Team
+        <label htmlFor="Country" className={labelClasses}>
+          Country
         </label>
         <input
           type="text"
-          id="favoriteTeam"
-          name="favoriteTeam"
-          value={formData.favoriteTeam}
+          id="Country"
+          name="Country"
+          value={formData.Country}
           onChange={handleChange}
           className={inputClasses}
-          placeholder="Your favorite team"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="favoriteCountry" className={labelClasses}>
-          Favorite Country
-        </label>
-        <input
-          type="text"
-          id="favoriteCountry"
-          name="favoriteCountry"
-          value={formData.favoriteCountry}
-          onChange={handleChange}
-          className={inputClasses}
-          placeholder="Your favorite country"
+          placeholder="Your country"
         />
       </div>
 

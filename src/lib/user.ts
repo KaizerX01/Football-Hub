@@ -5,16 +5,14 @@ import { z } from "zod";
 
 export interface UpdatedUser{
   name:string,
-  favoriteTeam : string,
-  favoriteCountry:string,
+  Country:string,
   password:string,
   avatar_url?:string
 }
 
 interface metadata_User{
   name:string,
-  favoriteTeam:string,
-  favoriteCountry:string,
+  Country:string,
   avatar_url?:string
 }
 
@@ -35,7 +33,7 @@ export function useLoggedInUser() {
       if (user) {
         const { data, error: metaError } = await supabase
           .from("users")
-          .select("name, favoriteTeam, favoriteCountry, avatar_url")
+          .select("name, Country, avatar_url")
           .eq("id", user.id)
           .single();
 
@@ -64,8 +62,7 @@ export async function  UpdateUser (updatedUser : UpdatedUser){
 
   const UpdatedUserSchema = z.object({
     name:z.string().min(1,'the name should be at least 1 carractere'),
-    favoriteTeam :z.string(),
-    favoriteCountry:z.string(),
+    Country:z.string(),
     avatar_url:z.string()
   })
 
@@ -94,8 +91,7 @@ export async function  UpdateUser (updatedUser : UpdatedUser){
 
   const {data , error } =await supabase.from('users').update({
     name : updatedUser.name,
-    favoriteTeam : updatedUser.favoriteTeam,
-    favoriteCountry:updatedUser.favoriteCountry,
+    Country:updatedUser.Country,
     avatar_url : updatedUser.avatar_url
   }).eq('id',user?.id);
 

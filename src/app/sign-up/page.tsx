@@ -16,8 +16,7 @@ export function SignUpPage() {
     email: "",
     password: "",
     confirmPassword: "",
-    favoriteTeam: "",
-    favoriteCountry: "",
+    Country: "",
   });
   const [passwordError, setPasswordError] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +41,7 @@ export function SignUpPage() {
       name: formData.fullName,
       email: formData.email,
       password: formData.password,
-      favoriteTeam: formData.favoriteTeam,
-      favoriteCountry: formData.favoriteCountry,
+      Country: formData.Country,
     });
 
     if (error) {
@@ -162,46 +160,24 @@ export function SignUpPage() {
                     </div>
                   </div>
                 </div>
-                {/* Favorite Team Field */}
+
+                {/* Country Field */}
                 <div className="space-y-2">
                   <label
-                    htmlFor="fullName"
+                    htmlFor="Country"
                     className="text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
-                    Favorite Team (optional)
+                    Country (optional)
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <User className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
-                      id="favoriteTeam"
-                      name="favoriteTeam"
+                      id="Country"
+                      name="Country"
                       type="text"
-                      value={formData.favoriteTeam}
-                      onChange={handleChange}
-                      className="pl-10 block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 text-gray-900 dark:text-gray-100 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                      placeholder="Real Madrid"
-                    />
-                  </div>
-                </div>
-                {/* Favorite Team Field */}
-                <div className="space-y-2">
-                  <label
-                    htmlFor="fullName"
-                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    Favorite Country (optional)
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <input
-                      id="favoriteCountry"
-                      name="favoriteCountry"
-                      type="text"
-                      value={formData.favoriteCountry}
+                      value={formData.Country}
                       onChange={handleChange}
                       className="pl-10 block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 text-gray-900 dark:text-gray-100 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                       placeholder="Spain"

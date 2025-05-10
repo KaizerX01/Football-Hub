@@ -4,8 +4,14 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const response = await apiClient.get("/competitions");
-    const data = response.data.competitions;
-    return NextResponse.json(data);
+    const competitions = response.data.competitions;
+
+    // Filter out FIFA World Cup
+    const filtered = competitions.filter(
+      (comp: any) => comp.name !== "FIFA World Cup"
+    );
+
+    return NextResponse.json(filtered);
   } catch (error) {
     console.error(error);
     return NextResponse.json(

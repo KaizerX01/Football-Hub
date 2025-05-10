@@ -10,8 +10,7 @@ export interface newUser {
     name:string;
     email: string;
     password: string;
-    favoriteTeam:string;
-    favoriteCountry:string
+    Country:string
 }
 
 export const  login = async (user: User) => {
@@ -46,8 +45,7 @@ export const  SignUp = async (user: newUser) => {
         name:z.string().min(1,'name must contain at least 1 caracteres'),
         email : z.string().email('Invalid Email!'),
         password : z.string().min(6,'Password must contain more than 6 caracteres'),
-        favoriteTeam : z.string(),
-        favoriteCountry : z.string(),
+        Country : z.string(),
 
     })
 
@@ -84,8 +82,7 @@ export const  SignUp = async (user: newUser) => {
           id : authUser?.user?.id,
           email : user.email ,
           name : user.name,
-          favoriteTeam:user.favoriteTeam,
-          favoriteCountry:user.favoriteCountry
+          Country:user.Country
         }
       ])
 
