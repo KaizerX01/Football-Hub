@@ -162,6 +162,20 @@
       "when": 1746905530149,
       "tag": "0022_groovy_korg",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1746984013378,
+      "tag": "0023_deep_firebrand",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1746984056065,
+      "tag": "0024_rainy_dracula",
+      "breakpoints": true
     }
   ]
 }

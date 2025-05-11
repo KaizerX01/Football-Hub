@@ -1,0 +1,1 @@
+DROP TABLE "subscribed_emails" CASCADE;
