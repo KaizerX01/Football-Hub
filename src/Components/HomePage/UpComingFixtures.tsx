@@ -101,11 +101,7 @@ export function UpcomingFixturesSection() {
   }
 
   if (!randomTeam) {
-    return (
-      <div className="text-red-400 text-center p-4">
-        ⚠️ You have no favorite teams.
-      </div>
-    );
+    return <div className="text-red-400 text-center p-4"></div>;
   }
 
   if (matchError || !matchesData?.matches?.length) {

@@ -164,19 +164,19 @@ export default function Footer() {
               Contact Us
             </Link>
             <Link
-              href="/faq"
+              href="/help/FAQ"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               FAQ
             </Link>
             <Link
-              href="/privacy"
+              href="/help/Privacy-Policy"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/terms"
+              href="/help/Terms-of-Service"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               Terms of Service
