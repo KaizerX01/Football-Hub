@@ -23,7 +23,7 @@ export default function FAQ() {
               How do I add a favorite team?
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Simply go to the "Teams" page, find your team, and click the star
+              Simply go to the &quot;Teams&quot; page, find your team, and click the star
               icon to add it to your favorites.
             </p>
           </CardContent>
