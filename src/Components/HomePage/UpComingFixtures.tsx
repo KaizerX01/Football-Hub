@@ -32,14 +32,12 @@ export function UpcomingFixturesSection() {
     isError: errorFavorites,
   } = useFavoriteTeams(userId || undefined);
 
-  const teams = favoriteTeamsData?.teams || [];
-
-  // Generate one random team after favorite teams load
   const randomTeam = useMemo(() => {
-    if (!teams.length) return null;
-    const randomIndex = Math.floor(Math.random() * teams.length);
-    return teams[randomIndex];
-  }, [teams]);
+  const teams = favoriteTeamsData?.teams || [];
+  if (!teams.length) return null;
+  const randomIndex = Math.floor(Math.random() * teams.length);
+  return teams[randomIndex];
+}, [favoriteTeamsData]);
 
   const {
     data: matchesData,
