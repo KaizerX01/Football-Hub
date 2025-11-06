@@ -9,7 +9,7 @@ export default function TermsOfService() {
           By using FootballHub, you agree to comply with these Terms of Service.
         </p>
         <p>
-          FootballHub provides football data and notifications on an "as-is"
+          FootballHub provides football data and notifications on an &quot;as-is&quot;
           basis. While we strive for accuracy, we do not guarantee the
           completeness or reliability of match information.
         </p>
