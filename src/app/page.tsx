@@ -1,11 +1,18 @@
+"use client";
 import { HeroSection } from "@/Components/HomePage/HeroSection";
 import { LiveMatchesSection } from "@/Components/HomePage/LiveMatchesSection";
 import { NewsSection } from "@/Components/HomePage/NewsSection";
 import { TopCompetitionsSection } from "@/Components/HomePage/TopCompetitionSection";
 import { UpcomingFixturesSection } from "@/Components/HomePage/UpComingFixtures";
+import { useCompetitionScorers } from "@/hooks/useCompetitionScorers"; // Import the hook
 import React from "react";
+import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
+  // Fetch Premier League top scorers
+  const { data: scorers, isLoading } = useCompetitionScorers("PL");
+
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 text-white overflow-hidden">
       {/* Background effects */}
@@ -45,47 +52,64 @@ export default function HomePage() {
           </section>
 
           {/* Right Sidebar - Featured, Ads, Widgets */}
-          <aside className="space-y-6">
-            <div className="bg-zinc-900/70 rounded-xl p-4 border border-white/10 shadow-md">
-              {/* Featured Match / Odds / Promotions */}
-              <h2 className="text-lg font-semibold mb-3">Featured</h2>
-              <div className="flex items-center justify-between bg-zinc-800 rounded-lg px-4 py-3 mb-2">
-                <div className="flex items-center gap-2">
-                  <img src="/psg-logo.png" alt="PSG" className="h-6 w-6" />
-                  <span>PSG</span>
+          <aside className="bg-zinc-900/70 rounded-xl p-4 border border-white/10 shadow-md h-fit">
+            {/* Top Scorers */}
+            <div className="bg-slate-800/50 backdrop-blur-md rounded-xl p-4 border border-slate-700/50">
+              <h2 className="text-lg font-semibold mb-4">
+                Top Scorers (Premier League)
+              </h2>
+
+              {isLoading ? (
+                <div className="space-y-3">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-2 rounded-lg bg-slate-700/30 animate-pulse"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 rounded-full bg-slate-600" />
+                        <div className="w-24 h-3 bg-slate-600 rounded" />
+                      </div>
+                      <div className="w-4 h-4 bg-slate-600 rounded-full" />
+                    </div>
+                  ))}
                 </div>
-                <span className="text-xl font-bold">1 - 0</span>
-                <div className="flex items-center gap-2">
-                  <span>Arsenal</span>
-                  <img
-                    src="/arsenal-logo.png"
-                    alt="Arsenal"
-                    className="h-6 w-6"
-                  />
+              ) : (
+                <div className="space-y-2">
+                  {scorers?.scorers
+                    .slice(0, 5)
+                    .map((scorer: any, index: number) => (
+                      <Link
+                        key={scorer.player.id}
+                        href={`/players/${scorer.player.id}`}
+                        className="flex items-center justify-between p-2 hover:bg-slate-700/30 rounded-lg transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`${scorer.team.color}`}>
+                            {scorer.team.icon}
+                          </span>
+                          <span>{scorer.player.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold">
+                            {scorer.goals} goals
+                          </span>
+                          <Star
+                            size={16}
+                            className="text-gray-400 hover:text-yellow-400"
+                          />
+                        </div>
+                      </Link>
+                    ))}
                 </div>
-              </div>
-              <div className="flex justify-between text-sm text-gray-300">
-                <div>
-                  1 <span className="text-red-400">1.57</span>
-                </div>
-                <div>
-                  X <span className="text-yellow-400">4.00</span>
-                </div>
-                <div>
-                  2 <span className="text-green-400">5.50</span>
-                </div>
-              </div>
+              )}
             </div>
 
-            {/* Optionally: Ads or Weekly Challenge */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl p-4 shadow-md">
-              <div className="font-semibold text-white text-center">
-                🏆 Weekly Challenge
-              </div>
-              <div className="text-sm text-center text-white/80">
-                Time left: 4d 10h
-              </div>
-            </div>
+            <Link href="/Competitions/PL">
+              <button className="text-sm text-blue-400 mt-4 flex items-center justify-center w-full hover:underline">
+                Show more
+              </button>
+            </Link>
           </aside>
         </div>
       </main>
